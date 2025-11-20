@@ -297,6 +297,23 @@ bool InstallPhysXNew(const std::wstring& tempDir, bool& incompatibleOut) {
     return false;
 }
 
+// Step 7: nGlide 2.10 (NSIS, тихая установка)
+bool InstallNGlide(const std::wstring& tempDir) {
+    std::wstring nglideFile = tempDir + L"\\nGlide210_setup.exe";
+
+    if (FAILED(DownloadFileSimple(
+        L"https://archive.org/download/Redistributable/nGlide210_setup.exe",
+        nglideFile
+    ))) return false;
+
+    if (!FileExists(nglideFile)) return false;
+
+    // NSIS silent mode
+    DWORD code = RunProcess(nglideFile, L"/S");
+
+    return (code == 0);
+}
+
 int main() {
     // Steps list
     std::vector<StepInfo> steps = {
@@ -305,7 +322,8 @@ int main() {
         {"DirectX Runtime",             "Pending"},
         {"OpenAL Audio",                "Pending"},
         {"NVIDIA PhysX Legacy",         "Pending"},
-        {"NVIDIA PhysX (new)",          "Pending"}
+        {"NVIDIA PhysX (new)",          "Pending"},
+        {"nGlide 2.10",                 "Pending"}
     };
 
     int overallPercent = 0;
@@ -336,14 +354,14 @@ int main() {
     else {
         steps[0].status = "Error";
     }
-    overallPercent = 25;
+    overallPercent = 20;
     currentAction = "Step 1 completed.";
     RenderUI(overallPercent, currentAction, steps);
 
     // STEP 2 – VC++ 2012+
     steps[1].status = "In progress";
     currentAction = "Installing Visual C++ 2012 and newer...";
-    overallPercent = 30;
+    overallPercent = 25;
     RenderUI(overallPercent, currentAction, steps);
 
     if (InstallVC2012Plus(tempDir)) {
@@ -352,14 +370,14 @@ int main() {
     else {
         steps[1].status = "Error";
     }
-    overallPercent = 45;
+    overallPercent = 40;
     currentAction = "Step 2 completed.";
     RenderUI(overallPercent, currentAction, steps);
 
     // STEP 3 – DirectX Runtime (optional)
     steps[2].status = "In progress";
     currentAction = "Installing DirectX Runtime...";
-    overallPercent = 50;
+    overallPercent = 45;
     RenderUI(overallPercent, currentAction, steps);
 
     if (InstallDirectX(tempDir)) {
@@ -368,14 +386,14 @@ int main() {
     else {
         steps[2].status = "Skipped (not required)";
     }
-    overallPercent = 60;
+    overallPercent = 55;
     currentAction = "DirectX step completed.";
     RenderUI(overallPercent, currentAction, steps);
 
     // STEP 4 – OpenAL Audio (optional)
     steps[3].status = "In progress";
     currentAction = "Installing OpenAL Audio...";
-    overallPercent = 65;
+    overallPercent = 60;
     RenderUI(overallPercent, currentAction, steps);
 
     if (InstallOpenAL(tempDir)) {
@@ -384,14 +402,14 @@ int main() {
     else {
         steps[3].status = "Skipped (not required)";
     }
-    overallPercent = 75;
+    overallPercent = 70;
     currentAction = "OpenAL step completed.";
     RenderUI(overallPercent, currentAction, steps);
 
     // STEP 5 – NVIDIA PhysX Legacy (required)
     steps[4].status = "In progress";
     currentAction = "Installing NVIDIA PhysX Legacy...";
-    overallPercent = 80;
+    overallPercent = 75;
     RenderUI(overallPercent, currentAction, steps);
 
     if (InstallPhysXLegacy(tempDir)) {
@@ -400,14 +418,14 @@ int main() {
     else {
         steps[4].status = "Error";
     }
-    overallPercent = 90;
+    overallPercent = 85;
     currentAction = "PhysX Legacy step completed.";
     RenderUI(overallPercent, currentAction, steps);
 
     // STEP 6 – NVIDIA PhysX (new, optional)
     steps[5].status = "In progress";
     currentAction = "Installing NVIDIA PhysX (new)...";
-    overallPercent = 95;
+    overallPercent = 88;
     RenderUI(overallPercent, currentAction, steps);
 
     bool physxNewIncompatible = false;
@@ -421,6 +439,19 @@ int main() {
         else {
             steps[5].status = "Error";
         }
+    }
+
+    // STEP 7 – nGlide 2.10
+    steps[6].status = "In progress";
+    currentAction = "Installing nGlide 2.10...";
+    overallPercent = 92;
+    RenderUI(overallPercent, currentAction, steps);
+
+    if (InstallNGlide(tempDir)) {
+        steps[6].status = "Installed";
+    }
+    else {
+        steps[6].status = "Error";
     }
 
     overallPercent = 100;
