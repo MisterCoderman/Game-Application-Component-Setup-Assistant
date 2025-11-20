@@ -51,7 +51,7 @@ This project is licensed under the GNU General Public License v3.0 (GPL-3.0).
 You are free to copy, modify, and distribute this project provided you comply with the terms of the GPL-3.0 license. The full text of the license can be found here: GPL-3.0 License https://www.gnu.org/licenses/gpl-3.0.html
 
 <hr>
-<b>Game & Application Component Setup Assistant</b>b>
+<b>Game & Application Component Setup Assistant</b>
 
 <b>Описание:</b>
 
