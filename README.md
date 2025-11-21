@@ -12,6 +12,8 @@ OpenAL Audio: A component for 3D sound and audio effects in games.
 
 NVIDIA PhysX: A library for handling physics effects in games (both legacy and newer versions).
 
+Added nGlide support (required for running Glide-based games on modern OS): A Glide wrapper that enables old 3Dfx-based games to run properly on modern systems.
+
 <b>Features:</b>
 
 Automatic downloading and installation of various versions of Visual C++ Redistributables.
@@ -19,6 +21,9 @@ Automatic downloading and installation of various versions of Visual C++ Redistr
 Installation of DirectX and OpenAL for enhanced graphics and sound in games.
 
 Installation of NVIDIA PhysX (both legacy and newer versions) for physics in games.
+
+Installation of nGlide for compatibility with classic Glide-based games.
+
 
 Support for running as Administrator to ensure proper installation of all components.
 
@@ -65,6 +70,9 @@ OpenAL Audio: компонент для работы с 3D-звуком и ау�
 
 NVIDIA PhysX: библиотека для работы с физическими эффектами в играх (как Legacy, так и новее).
 
+nGlide: добавлена поддержка Glide-wrapper, необходимого для запуска игр на Glide API на современных версиях Windows.
+
+
 <b>Функции:</b>
 
 Автоматическая загрузка и установка различных версий Visual C++ Redistributables.
@@ -72,6 +80,9 @@ NVIDIA PhysX: библиотека для работы с физическими
 Установка DirectX и OpenAL для улучшения графики и звука в играх.
 
 Установка NVIDIA PhysX (как Legacy, так и новые версии) для физики в играх.
+
+Установка nGlide для обеспечения совместимости игр, использующих Glide API.
+
 
 Поддержка работы от имени администратора для корректной установки всех компонентов.
 
